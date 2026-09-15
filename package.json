@@ -1,0 +1,38 @@
+{
+  "name": "Purchase-Order",
+  "version": "1.0.0",
+  "dependencies": {
+    "@cap-js/attachments": "^4.0.0",
+    "@cap-js/hana": "^2.8.1",
+    "@sap/cds": "^9.9.3",
+    "@sap/xssec": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^2.4.1",
+    "@sap/cds-dk": "^9.9.5"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "private": true,
+  "cds": {
+    "requires": {
+      "PRService": {
+        "kind": "odata-v4",
+        "model": "srv/external-service",
+        "credentials": {
+          "url": "https://your-pr-app-url/purchase-request",
+          "authentication": "OAuth2ClientCredentials",
+          "clientid": "your-client-id",
+          "clientsecret": "your-client-secret",
+          "tokenurl": "https://your-xsuaa-url/oauth/token"
+        }
+      },
+      "[production]": {
+        "auth": "xsuaa"
+      },
+      "connectivity": true,
+      "html5-repo": true
+    }
+  }
+}

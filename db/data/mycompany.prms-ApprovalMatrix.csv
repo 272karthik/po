@@ -1,0 +1,4 @@
+ID,minAmount,maxAmount,approverRole,active
+1,0,10000,Manager,true
+2,10001,50000,Senior Manager,true
+3,50001,999999999,Director,true
