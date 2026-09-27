@@ -25,7 +25,7 @@ service PurchaseOrderService @(path: '/purchase-order') {
         actions {
             action submit()                                     returns PurchaseOrders;
             action approve(comments: String(1000) default null) returns PurchaseOrders;
-            action reject(comments: String(1000))               returns PurchaseOrders;
+            action rejectPO(comments: String(1000))             returns PurchaseOrders;
             action cancel()                                     returns PurchaseOrders;
             action rework()                                     returns PurchaseOrders; // Rule 24
         };

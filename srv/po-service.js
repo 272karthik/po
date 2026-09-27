@@ -129,22 +129,30 @@ module.exports = cds.service.impl(async function () {
     // ================================================================
     this.on('READ', 'ApprovedPurchaseRequests', async (req) => {
         try {
+            console.log('=== Fetching approved PRs ===');
+
             const prs = await prService.run(
-                SELECT.from('PurchaseRequestService.PurchaseRequest')
-                    .where({ status: 'Approved' })
+                SELECT.from('PRService.PurchaseRequest').where({ status: 'Approved' })
             );
+
+            console.log('Fetched', prs.length, 'PRs');
+
             return prs.map(pr => ({
                 requestNumber: pr.requestNumber,
                 requesterName: pr.requesterName,
-                department: pr.department_code || pr.department,
+                department: pr.department || pr.department_code,
                 requestDate: pr.requestDate,
-                currency: pr.currency_code || pr.currency,
+                currency: pr.currency || pr.currency_code,
                 totalAmount: pr.totalAmount,
                 status: pr.status
             }));
         } catch (err) {
-            console.error('Failed to fetch approved PRs:', err.message);
-            return req.reject(502, 'Unable to fetch Approved Purchase Requests');
+            console.error('=== FULL ERROR ===');
+            console.error('Message:', err.message);
+            console.error('Code:', err.code);
+            console.error('Status:', err.status);
+            console.error('Stack:', err.stack);
+            return req.reject(502, `Unable to fetch PRs: ${err.message}`);
         }
     });
 
@@ -455,7 +463,7 @@ module.exports = cds.service.impl(async function () {
     // ----------------------------------------------------------------
     // RULE 23: REJECT – Submitted → Rejected (comments mandatory, min 20)
     // ----------------------------------------------------------------
-    this.on('reject', async (req) => {
+    this.on('rejectPO', async (req) => {
         const ID = getPOId(req);
         const comments = req.data.comments || req.data.reason || '';
 

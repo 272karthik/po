@@ -4,6 +4,10 @@
   "dependencies": {
     "@cap-js/attachments": "^4.0.0",
     "@cap-js/hana": "^2.8.1",
+    "@sap-cloud-sdk/connectivity": "^4.9.1",
+    "@sap-cloud-sdk/core": "^1.54.2",
+    "@sap-cloud-sdk/http-client": "^4.9.1",
+    "@sap-cloud-sdk/resilience": "^4.9.1",
     "@sap/cds": "^9.9.3",
     "@sap/xssec": "^4"
   },
@@ -21,11 +25,11 @@
         "kind": "odata-v4",
         "model": "srv/external-service",
         "credentials": {
-          "url": "https://your-pr-app-url/purchase-request",
+          "url": "https://c2f87296trial-dev-purchase-request-system-srv.cfapps.us10-001.hana.ondemand.com/odata/v4/purchase-request",
           "authentication": "OAuth2ClientCredentials",
-          "clientid": "your-client-id",
-          "clientsecret": "your-client-secret",
-          "tokenurl": "https://your-xsuaa-url/oauth/token"
+          "clientid": "sb-purchase-request-system-c2f87296trial-dev!t693697",
+          "clientsecret": "a1158ca3-e0e6-4b45-93f8-4b5afc3b3062$-TnccrHto0yM9Vez9JjxpaxD_ySN4mDZpjN56OlF1CY=",
+          "tokenurl": "https://c2f87296trial.authentication.us10.hana.ondemand.com/oauth/token"
         }
       },
       "[production]": {
